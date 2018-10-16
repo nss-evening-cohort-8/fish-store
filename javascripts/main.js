@@ -12,4 +12,6 @@ $.get('../db/fishes.json')
     .fail((error) => {
         console.error(error);
     });    // only simicolon you have should be here
-    
+
+
+        
