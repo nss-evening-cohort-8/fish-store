@@ -37,11 +37,12 @@ const writeFish = (arrayOfFish) => {
         </div>`;
     })
     $("#available").append(newString);
-    addRemoveEvent();
+    moveEvent();
 };
 
-const addRemoveEvent = () => {
+const moveEvent = () => {
     $("#main").find('.add').on("click", (event) => {
-        $(event.currentTarget).closest(".fish").hide();
+        $("#snagged").append($(event.currentTarget).closest(".fish"));
+        // $(event.currentTarget).closest(".fish").hide();
     })
-}
+};
