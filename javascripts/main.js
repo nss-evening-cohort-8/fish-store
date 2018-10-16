@@ -33,5 +33,3 @@ const writeFishes = (arrayOfFishes) => {
 	});
 	$('#available').append(domString);
 };
-
-// $(domString).appendTo("#available");
