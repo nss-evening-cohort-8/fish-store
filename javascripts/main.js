@@ -24,26 +24,35 @@ const writeFishes = (arrayOfFishes) => {
   })
   // Write to the available div
   $("#available").append(domString);
-  bindEvents();
+  // bindEvents();
 }
 
-const bindEvents = () => {
-  $(".add").on('click', (e) => {
-    // what is the div that has the fish
-    const fishToMove = $(e.target).closest('.fish');
-    // move it to the 'snagged' div
-    $("#snagged").append(fishToMove);
-    // button text => Remove from Basket | change class - 'add' + 'remove'
-    $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
-  });
+// const bindEvents = () => {
+//   $(".add").on('click', (e) => {
+    
+//   });
 
-  // Remove Fish
-};
+//   // Remove Fish
+//   $(".remove").on('click', (e) => {
+    
+//   })
+// };
 
 // Dynamically listen for events that happen on buttons with a class of add
-// $('body').on('click', 'button.add', () => {
+$('body').on('click', 'button.add', (e) => {
+  // what is the div that has the fish
+  const fishToMove = $(e.target).closest('.fish');
+  // move it to the 'snagged' div
+  $("#snagged").append(fishToMove);
+  // button text => Remove from Basket | change class - 'add' + 'remove'
+  $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+})
 
-// })
+$('body').on('click', 'button.remove', (e) => {
+  const fishToMove = $(e.target).closest('.fish');
+    $("#available").append(fishToMove);
+    $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+  })
 
 // Load Fish
 $.get('../db/fishes.json')
