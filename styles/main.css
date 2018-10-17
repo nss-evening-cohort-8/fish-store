@@ -5,3 +5,7 @@ body {
 .on-sale{
   border-color: red;
 }
+
+.card {
+  margin: 5px;
+}

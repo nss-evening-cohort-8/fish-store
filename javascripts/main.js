@@ -74,6 +74,9 @@ const bindEvents = () => {
 
 const onSaleButtton = () => {
     $("#show-sale").on("click", () => {
+        // hides all non for sale that arent in the basket
         $("#available").children().filter(".non-sale").toggle();
+        // hides all non for sale regardless of basket status
+        // $(".fish").not(".on-sale").toggle(); 
     });
 };
