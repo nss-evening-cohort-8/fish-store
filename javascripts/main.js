@@ -2,14 +2,6 @@
 
 // Add fish to "Basket"
 
-//Load fish
-$.get('../db/fishes.json')
- .done((data) => {
- writeFishes(data.fishes);
-})
-.fail((error) => {
-    console.error(error)
-});
 
 const writeFishes = (arrayOfFishes) => {
     let domString = '';
@@ -33,4 +25,30 @@ const writeFishes = (arrayOfFishes) => {
     })
     // Write to the available div
     $("#available").append(domString);
+    bindEvents();
 }
+
+// This is also acceptable.
+// $('body').on('click', 'button.add', () => {
+// })
+
+const bindEvents = () => {  
+    $(".add").on('click', (e) => {
+        // what is the div that has the fish
+        const fishToMove = $(e.target).closest('.fish');
+        // move it to the 'snagged' div
+        $("#snagged").append(fishToMove);
+        // button text => Remove from Basket | change class -"add" +"remove"
+        $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+        });
+}
+
+
+//Load fish
+$.get('../db/fishes.json')
+ .done((data) => {
+ writeFishes(data.fishes);
+})
+.fail((error) => {
+    console.error(error)
+});
