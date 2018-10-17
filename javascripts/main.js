@@ -20,7 +20,7 @@ $.get("../db/fishes.json")
 const writeFish = (arrayOfFish) => {
     let newString = ``;
     arrayOfFish.forEach((fish)=> {
-        newString += `<div class="${fish.onSale ? 'on-sale' : ''} fish card col-md-6 col-md-offset-3">
+        newString += `<div class="${fish.onSale ? 'on-sale' : 'non-sale'} fish card col-md-6 col-md-offset-3">
             <div class="thumbnail">
                 <img src="${fish.imageSoure}"
                     alt="" width="40%">
@@ -39,6 +39,7 @@ const writeFish = (arrayOfFish) => {
     $("#available").append(newString);
     bindEvents();
     toBasket();
+    onSaleButtton();
 };
 
 const toggler = () => {
@@ -70,3 +71,9 @@ const bindEvents = () => {
         removeBasket()
     })
 }
+
+const onSaleButtton = () => {
+    $("#show-sale").on("click", () => {
+        $("#available").children().filter(".non-sale").toggle();
+    });
+};
