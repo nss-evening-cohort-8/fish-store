@@ -2,6 +2,6 @@ body {
   text-align: center;
 }
 
-.on-sale > .thumbnail {
+.on-sale{
   border-color: red;
 }
