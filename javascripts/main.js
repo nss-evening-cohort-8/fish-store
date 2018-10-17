@@ -21,10 +21,13 @@ const writeFishes = (arrayOfFishes) => {
         //write to the available div
         $("#available").append(domString);
         // $(domString).appendTo("#available");
-        bindEvents();
+        AddEvents();
     }
-
-    const bindEvents = () => {
+$("#show-sale").click(() => {
+// grab all of the divs with the class fish, give me just the onces WITHOUT the class 'on-sale' and HIDE
+$(".fish").not(".on-sale").toggle(); //toggle hides and shows the fishes 
+})
+    const AddEvents = () => {
         $(".add").on('click',(e) => {
 
             // what is the div that has the fish
@@ -33,13 +36,38 @@ const writeFishes = (arrayOfFishes) => {
             $("#snagged").append(fishToMove);
             //button text => Remove from basket | change class - 'add' + 'remove'
             $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
+            removeEvent();
+        })
+        
+    }
+    const removeEvent = () =>{
+        $(".remove").on('click', (e) => {            
+            const fishToMove = $(e.target).closest('.fish');
+            $("#available").append(fishToMove);
+            $(e.target).text('Add To Basket').addClass('add').removeClass('remove');     
+            AddEvents();  
         })
     }
+   
+
     //dynamically listen for events that hpapen on buttons with a class
 // $('body').on('click', 'button.add',() => {
+    // $(".add").on('click',(e) => {
 
+        // what is the div that has the fish
+    //    const fishToMove = $(e.target).closest('.fish');
+        // move it to the 'snagged' div 
+        // $("#snagged").append(fishToMove);
+        //button text => Remove from basket | change class - 'add' + 'remove'
+        // $(e.target).text('Remove From Basket').addClass('remove').removeClass('add');
 // })
 
+// $('body').on('click', 'button.remove',() => {
+    // console.log('click');
+    // const fishToRemove = $(e.target).closest('.fish');
+    // $("#available").append(fishToRemove);
+    // $(e.target).text('Add To Basket').addClass('add').removeClass('remove');  
+    // }
 
     $.get('../db/fishes.json')
     .done((data) => {
