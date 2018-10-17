@@ -37,12 +37,36 @@ const writeFish = (arrayOfFish) => {
         </div>`;
     })
     $("#available").append(newString);
-    moveEvent();
+    bindEvents();
+    toBasket();
 };
 
-const moveEvent = () => {
+const toggler = () => {
+    $(event.currentTarget).toggleClass("add remove");
+
+}
+
+const toBasket = () => {
+    $("#main").find(".add").off();
     $("#main").find('.add').on("click", (event) => {
         $("#snagged").append($(event.currentTarget).closest(".fish"));
-        // $(event.currentTarget).closest(".fish").hide();
+        toggler();
+        $(event.target).text("Remove from Basket")
     })
 };
+
+const removeBasket = () => {
+    $("#main").find(".remove").off();
+    $("#main").find('.remove').on("click", (event) => {
+        $("#available").append($(event.currentTarget).closest(".fish"));
+        toggler();
+        $(event.target).text("Add to Basket");
+    })
+};
+
+const bindEvents = () => {
+    $('body').on("click", () => {
+        toBasket();
+        removeBasket()
+    })
+}
