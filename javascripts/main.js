@@ -3,15 +3,6 @@
 
 // Load fish
 
-$.get('../db/fishes.json')
-	.done((data) => {
-		console.log(data);
-		writeFishes(data.fishes);
-	})
-	.fail((error) => {
-		console.error(error);
-	});
-
 const writeFishes = (arrayOfFishes) => {
 	let domString = '';
 
@@ -32,4 +23,23 @@ const writeFishes = (arrayOfFishes) => {
 		</div>`;
 	});
 	$('#available').append(domString);
+	blindEvents();
 };
+
+const blindEvents = () => {
+	$('.add').on('click', (e) => {
+		const fishToMove = $(e.target).closest('.fish');
+		$('#snagged').append(fishToMove);
+		// Button text => Remove from the basket | change class - 'add' + 'remove'
+		$(e.target).text('Remove from basket').addClass('remove').removeClass('add');
+	});
+};
+
+$.get('../db/fishes.json')
+	.done((data) => {
+		// console.log(data);
+		writeFishes(data.fishes);
+	})
+	.fail((error) => {
+		console.error(error);
+	});
