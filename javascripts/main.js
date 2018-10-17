@@ -40,8 +40,20 @@ const bindEvents = () => {
         $("#snagged").append(fishToMove);
         // button text => Remove from Basket | change class -"add" +"remove"
         $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
-        });
+        // Remove functionality
+        $('.remove').on('click', (e) => {
+            const fishToRemove = $(e.target).closest('.fish');
+            $('#available').append(fishToRemove);
+            $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+        });    
+    });
+        
 }
+
+$('#show-sale').click(() => {
+    //all of the divs with the class fish, give me just the ones without the class 'on-sale'
+    $(".fish").not(".on-sale").toggle() //toggle hides and shows
+})
 
 
 //Load fish
