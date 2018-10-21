@@ -82,3 +82,27 @@ $.get('../db/fishes.json')
 .fail((error) => {
     console.error(error)
 });
+
+// Remove fish
+  
+// Dynamically listen for events that happen on buttons with a class of add
+$('body').on('click', 'button.add', (e) => {
+  // what is the div that has the fish
+  const fishToMove = $(e.target).closest('.fish');
+  // move it to the 'snagged' div
+  $("#snagged").append(fishToMove);
+  // button text => Remove from Basket | change class - 'add' + 'remove'
+  $(e.target).text('Remove from Basket').addClass('remove').removeClass('add');
+})
+
+$('body').on('click', 'button.remove', (e) => {
+  const fishToMove = $(e.target).closest('.fish');
+    $("#available").append(fishToMove);
+    $(e.target).text('Add To Basket').addClass('add').removeClass('remove');
+  })
+
+
+  
+
+  
+
