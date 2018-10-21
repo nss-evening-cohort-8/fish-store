@@ -1,4 +1,26 @@
 // Filter fish that are "on sale"
+$('#show-sale').click(() => {
+    //all of the divs with the class fish, give me just the ones without the class 'on-sale'
+    $(".fish").not(".on-sale").toggle() //toggle hides and shows
+    $("#show-sale").text((i, text) => {
+        if (text === "Show Sale Fish"){
+            return "Show All Fish";
+        } else {
+            return "Show Sale Fish";
+        }
+        // return (text === "Show Sale Fish") ? "Show All Fish" : "Show Sale Fish"
+    })
+})
+
+const discount = .12;
+
+const applySale = () => {
+    $(".on-sale").each((i, fish) => {
+        const fullPrice = $(fish).find(".price");
+        const newPrice = (parseInt(fullPrice.html()) * (1 - discount)).toFixed(2);
+        fullPrice.html(newPrice);
+    })
+}
 
 // Add fish to "Basket"
 
@@ -50,16 +72,12 @@ const bindEvents = () => {
         
 }
 
-$('#show-sale').click(() => {
-    //all of the divs with the class fish, give me just the ones without the class 'on-sale'
-    $(".fish").not(".on-sale").toggle() //toggle hides and shows
-})
-
 
 //Load fish
 $.get('../db/fishes.json')
  .done((data) => {
  writeFishes(data.fishes);
+ applySale();
 })
 .fail((error) => {
     console.error(error)
